@@ -1,0 +1,14 @@
+fk_paymentlog_employeeid
+
+johnypaymentlog => 
+ALTER TABLE `johnnypaymentlog` ADD CONSTRAINT `fk_paymentlog_employeeid` FOREIGN KEY (`employeeId`) REFERENCES `johnnyemployee`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+johnyorderlog
+ALTER TABLE `johnnyorderlog` ADD CONSTRAINT `fk_orderlog_employeeid` FOREIGN KEY (`employeeId`) REFERENCES `johnnyemployee`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `johnnyorderlog` DROP FOREIGN KEY `fk_orderlog_employeeid`; ALTER TABLE `johnnyorderlog` ADD CONSTRAINT `fk_orderlog_skuid` FOREIGN KEY (`skuId`) REFERENCES `johnnysku`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+//Adding new column to Sku table in order to trace stack of products.
+ALTER TABLE `johnnysku` ADD `stock` INT NULL DEFAULT '0' AFTER `price`;
+
