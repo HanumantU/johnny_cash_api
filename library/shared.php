@@ -64,7 +64,7 @@ function callHook() {
         $urlArray[0] = "index";
     }
 
-    $action = empty($urlArray[2]) ? $urlArray[1] : $urlArray[2];
+    $action = empty($urlArray[2]) ? camelCase($urlArray[1]) : camelCase($urlArray[2]);
 
     array_shift($urlArray);
 
@@ -80,6 +80,18 @@ function callHook() {
     if ((int)method_exists($controller, $action)) {
         call_user_func_array(array($dispatch, $action), $queryString);
     }
+}
+
+function camelCase($str, array $noStrip = []) {
+    // non-alpha and non-numeric characters become spaces
+    $str = preg_replace('/[^a-z0-9' . implode("", $noStrip) . ']+/i', ' ', $str);
+    $str = trim($str);
+    // uppercase the first character of each word
+    $str = ucwords($str);
+    $str = str_replace(" ", "", $str);
+    $str = lcfirst($str);
+
+    return $str;
 }
 
 /** Autoload any classes that are required **/

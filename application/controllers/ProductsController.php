@@ -11,12 +11,12 @@ class ProductsController extends Controller {
         }
     }
 
-    function top_selling_products() {
+    function topSellingProducts() {
         $result = $this->Product->getTopSellingProducts($_GET);
         $this->response(stripSlashesDeep(json_encode($result)), 200);
     }
 
-    function stock_state() {
+    function stockState() {
         $result = $this->Product->getStockState();
         $this->response(stripSlashesDeep(json_encode($result)), 200);
     }

@@ -4,7 +4,7 @@
 class Product extends Model {
     function getStockState() {
 
-        $sql = "Select name, stock from johnnysku Order by stock ASC";
+        $sql = "SELECT name, stock FROM johnnysku ORDER BY stock ASC";
         $result = $this->dbh->query($sql);
         $rows = array();
         while ($r = $result->fetch(PDO::FETCH_ASSOC)) {
