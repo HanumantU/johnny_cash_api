@@ -59,6 +59,7 @@ function callHook() {
     $controller = $urlArray[0];
     array_shift($urlArray);
 
+
     //in case of POST, PUT, DELETE requests
     if (preg_match("/\d+$/", $urlArray[0], $matches)) {
         $urlArray[0] = "index";
@@ -67,9 +68,7 @@ function callHook() {
     $action = empty($urlArray[2]) ? camelCase($urlArray[1]) : camelCase($urlArray[2]);
 
     array_shift($urlArray);
-
     $queryString = $urlArray;
-
     $controllerName = $controller;
     $controller = ucwords($controller);
     $model = rtrim($controller, 's');

@@ -5,14 +5,19 @@ class ProductsController extends Controller {
     function index($id = null) {
         switch ($this->get_request_method()) {
             case 'GET':
+                $result = $this->Product->getProducts($id);
+                $this->response(stripSlashesDeep(json_encode($result)), 200);
                 break;
-            default:
-                $this->response("Request Un-recognized", 400);
         }
     }
 
     function topSellingProducts() {
-        $result = $this->Product->getTopSellingProducts($_GET);
+        // extracting require data from GET.
+        $data['from_date'] = !empty($_GET['fromdate']) ? $_GET['fromdate'] : NULL;
+        $data['to_date'] = !empty($_GET['todate']) ? $_GET['todate'] : NULL;
+
+        $result = $this->Product->getTopSellingProducts($data);
+
         $this->response(stripSlashesDeep(json_encode($result)), 200);
     }
 

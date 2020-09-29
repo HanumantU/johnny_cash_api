@@ -15,12 +15,31 @@ class Product extends Model {
         return $rows;
     }
 
+    function getProducts($id) {
+
+        $sql = "SELECT * FROM johnnysku ";
+        if ($id > 0) {
+            $sql .= "Where id=$id";
+        }
+        $sql .= " ORDER BY id";
+
+        $result = $this->dbh->query($sql);
+        $rows = array();
+
+        while ($r = $result->fetch(PDO::FETCH_ASSOC)) {
+            $r['name'] = utf8_encode($r['name']);
+            $rows[] =  json_encode($r);
+        }
+
+        return $rows;
+    }
+
     function getTopSellingProducts($data) {
 
         // Getting parameters from URL
-        if(isset($data['fromdate']) && !empty($data['fromdate'] && !empty($data['todate']))) {
-            $from_date = $data['fromdate']." 10:30:00";
-            $to_date = $data['todate']." 10:30:00";
+        if(isset($data['from_date']) && !empty($data['from_date'] && !empty($data['to_date']))) {
+            $from_date = $data['from_date']." 10:30:00";
+            $to_date = $data['to_date']." 10:30:00";
         }
 
         $sql = "SELECT js.name, jol.skuId, SUM(jol.quantity) AS TotalSellQuantity
