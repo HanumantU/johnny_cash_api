@@ -1,7 +1,6 @@
 <?php
 
 /** Configuration Variables **/
-
 define ('DEVELOPMENT_ENVIRONMENT',false);
 
 define('DB_NAME', 'johnny_cash');

@@ -2,7 +2,7 @@
 
 
 class Order extends Model {
-    function getUnpaidBillOfEmployee($data) {
+    function getUnpaidBillOfEmployee() {
 
         // Query will give unpaid bills of employee(not consider their paid amount).
         $sql1 = "SELECT jol.employeeId, je.name, SUM(jol.totalPrice) AS TotalUnpaidBill FROM johnnyorderlog jol JOIN johnnyemployee je WHERE jol.employeeId = je.id AND jol.paidInBox is NULL GROUP BY jol.employeeId";

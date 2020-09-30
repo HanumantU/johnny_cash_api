@@ -6,21 +6,16 @@ class Controller {
     protected $_controller;
     protected $_action;
 
-    public $_allow = array();
     public $_content_type = "application/json; charset=UTF-8";
     public $_request = array();
-    private $_method = "";
     private $_code = 200;
 
     function __construct($model, $controller, $action) {
-
         $this->inputs();
         $this->_controller = $controller;
         $this->_action = $action == '' ? "index" : $action;
         $this->_model = $model;
-
         $this->$model = new $model;
-
     }
 
     public function response($data, $status) {

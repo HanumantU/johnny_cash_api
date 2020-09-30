@@ -1,7 +1,6 @@
 <?php
 
 /** Check if environment is development and display errors **/
-
 function setReporting() {
     if (DEVELOPMENT_ENVIRONMENT == true) {
         error_reporting(E_ALL);
@@ -15,7 +14,6 @@ function setReporting() {
 }
 
 /** Check for Magic Quotes and remove them **/
-
 function stripSlashesDeep($value) {
     $value = is_array($value) ? array_map('stripSlashesDeep', $value) : stripslashes($value);
     return $value;
@@ -30,7 +28,6 @@ function removeMagicQuotes() {
 }
 
 /** Check register globals and remove them **/
-
 function unregisterGlobals() {
     if (ini_get('register_globals')) {
         $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
@@ -45,7 +42,6 @@ function unregisterGlobals() {
 }
 
 /** Main Call Function **/
-
 function callHook() {
     global $url;
     $urlArray = array();
@@ -58,12 +54,6 @@ function callHook() {
 
     $controller = $urlArray[0];
     array_shift($urlArray);
-
-
-    //in case of POST, PUT, DELETE requests
-    if (preg_match("/\d+$/", $urlArray[0], $matches)) {
-        $urlArray[0] = "index";
-    }
 
     $action = empty($urlArray[2]) ? camelCase($urlArray[1]) : camelCase($urlArray[2]);
 
@@ -94,7 +84,6 @@ function camelCase($str, array $noStrip = []) {
 }
 
 /** Autoload any classes that are required **/
-
 function __autoload($className) {
     if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php')) {
         require_once(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php');

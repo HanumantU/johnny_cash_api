@@ -2,8 +2,8 @@
 
 
 class Product extends Model {
-    function getStockState() {
 
+    function getStockState() {
         $sql = "SELECT name, stock FROM johnnysku ORDER BY stock ASC";
         $result = $this->dbh->query($sql);
         $rows = array();
@@ -16,7 +16,6 @@ class Product extends Model {
     }
 
     function getProducts($id) {
-
         $sql = "SELECT * FROM johnnysku ";
         if ($id > 0) {
             $sql .= "Where id=$id";
@@ -35,7 +34,6 @@ class Product extends Model {
     }
 
     function getTopSellingProducts($data) {
-
         // Getting parameters from URL
         if(isset($data['from_date']) && !empty($data['from_date'] && !empty($data['to_date']))) {
             $from_date = $data['from_date']." 10:30:00";
