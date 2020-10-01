@@ -5,7 +5,13 @@ class Product extends Model {
 
     function getStockState() {
         $sql = "SELECT name, stock FROM johnnysku ORDER BY stock ASC";
-        $result = $this->dbh->query($sql);
+
+        try{
+            $result = $this->dbh->query($sql);
+        }catch (Exception $e) {
+            throw new Exceptions($e->getMessage(), $e->getCode());
+        }
+
         $rows = array();
         while ($r = $result->fetch(PDO::FETCH_ASSOC)) {
             $r['name'] = utf8_encode($r['name']);
@@ -22,7 +28,12 @@ class Product extends Model {
         }
         $sql .= " ORDER BY id";
 
-        $result = $this->dbh->query($sql);
+        try{
+            $result = $this->dbh->query($sql);
+        }catch (Exception $e) {
+            throw new Exceptions($e->getMessage(), $e->getCode());
+        }
+
         $rows = array();
 
         while ($r = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -49,7 +60,12 @@ FROM johnnyorderlog jol JOIN johnnysku js WHERE jol.skuId = js.id";
 
         $sql .= " GROUP BY jol.skuId ORDER BY SUM(jol.quantity) DESC";
 
-        $result = $this->dbh->query($sql);
+        try{
+            $result = $this->dbh->query($sql);
+        }catch (Exception $e) {
+            throw new Exceptions($e->getMessage(), $e->getCode());
+        }
+
         $rows = array();
         while ($r = $result->fetch(PDO::FETCH_ASSOC)) {
             $rows[] =  json_encode($r);

@@ -1,7 +1,7 @@
 <?php
 
 /** Configuration Variables **/
-define ('DEVELOPMENT_ENVIRONMENT',false);
+define ('DEVELOPMENT_ENVIRONMENT', false);
 
 define('DB_NAME', 'johnny_cash');
 define('DB_USER', 'root');
