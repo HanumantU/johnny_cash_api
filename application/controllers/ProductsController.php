@@ -17,7 +17,7 @@ class ProductsController extends Controller {
         $data['to_date'] = !empty($_GET['todate']) ? date('Y-m-d', strtotime($_GET['todate'])) : NULL;
 
         $result = $this->Product->getTopSellingProducts($data);
-        $this->response(stripSlashesDeep(json_encode($result)));
+        $this->response(stripSlashesDeep(json_encode($result)), 200);
     }
 
     function stockState() {

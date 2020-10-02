@@ -4,6 +4,7 @@
 class Product extends Model {
 
     function getStockState() {
+        $result = [];
         $sql = "SELECT name, stock FROM johnnysku ORDER BY stock ASC";
 
         try{
@@ -22,6 +23,7 @@ class Product extends Model {
     }
 
     function getProducts($id) {
+        $result = [];
         $sql = "SELECT * FROM johnnysku ";
         if ($id > 0) {
             $sql .= "Where id=$id";
@@ -45,6 +47,7 @@ class Product extends Model {
     }
 
     function getTopSellingProducts($data) {
+        $result = [];
         // Getting parameters from URL
         if(isset($data['from_date']) && !empty($data['from_date'] && !empty($data['to_date']))) {
             $from_date = $data['from_date']." 10:30:00";

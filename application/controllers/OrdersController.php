@@ -12,6 +12,6 @@ class OrdersController extends Controller {
     // method to get all unpaid bills of employee
     function unpaid(){
         $result = $this->Order->getUnpaidBillOfEmployee();
-        $this->response(stripSlashesDeep(json_encode($result)));
+        $this->response(stripSlashesDeep(json_encode($result)), 200);
     }
 }
