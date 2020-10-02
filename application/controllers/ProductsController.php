@@ -3,10 +3,6 @@
 class ProductsController extends Controller {
     function index($id = null) {
         switch ($this->get_request_method()) {
-            case 'GET':
-                $result = $this->Product->getProducts($id);
-                $this->response(stripSlashesDeep(json_encode($result)), 200);
-                break;
             default:
                 throw new Exceptions("Request Un-recognized");
         }

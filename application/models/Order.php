@@ -21,20 +21,20 @@ class Order extends Model {
             throw new Exceptions($e->getMessage(), $e->getCode());
         }
         $arrPaidBill = $result->fetchAll(PDO::FETCH_ASSOC);
-
         $finalUnpaidBill = array();
+        $key = 0;
         if(!empty($arrUnpaidBill) && !empty($arrPaidBill)) {
-            foreach ($arrUnpaidBill as $key => $eachUnpaidBill) {
+            foreach ($arrUnpaidBill as $eachUnpaidBill) {
                 foreach ($arrPaidBill as $eachPaidBill) {
-                    if ($eachUnpaidBill['employeeId'] == $eachPaidBill['employeeId']) {
+                    if ($eachUnpaidBill['employeeId'] === $eachPaidBill['employeeId']) {
                         $finalUnpaidBill[$key]['id'] = $eachUnpaidBill['employeeId'];
                         $finalUnpaidBill[$key]['name'] = utf8_encode($eachUnpaidBill['name']);
                         $finalUnpaidBill[$key]['FinalUnpaidBill'] = ($eachUnpaidBill['TotalUnpaidBill'] - $eachPaidBill['TotalPaidBill']);
+                        $key += 1;
                     }
                 }
             }
         }
-
         return $finalUnpaidBill;
     }
 }
