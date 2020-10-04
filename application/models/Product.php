@@ -1,7 +1,8 @@
 <?php
 
 
-class Product extends Model {
+class Product extends Model
+{
 
     function getStockState() {
         $result = [];
@@ -10,7 +11,7 @@ class Product extends Model {
         try{
             $result = $this->dbh->query($sql);
         }catch (Exception $e) {
-            throw new Exceptions($e->getMessage(), $e->getCode());
+            throw new Exceptions(500, $e->getMessage(), $e->getCode());
         }
 
         $rows = array();
@@ -42,7 +43,7 @@ FROM johnnyorderlog jol JOIN johnnysku js WHERE jol.skuId = js.id";
         try{
             $result = $this->dbh->query($sql);
         }catch (Exception $e) {
-            throw new Exceptions($e->getMessage(), $e->getCode());
+            throw new Exceptions(500, $e->getMessage(), $e->getCode());
         }
 
         $rows = array();

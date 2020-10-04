@@ -1,11 +1,13 @@
 <?php
 
 
-class OrdersController extends Controller {
+class OrdersController extends Controller
+{
     function index($id = null) {
         switch ($this->get_request_method()) {
             default:
-                throw new Exceptions("Request Un-recognized");
+                $response['message'] = "URL not found.";
+                $this->response(stripSlashesDeep(json_encode($response)), 404);
         }
     }
 

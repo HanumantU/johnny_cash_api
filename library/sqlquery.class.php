@@ -1,7 +1,8 @@
 <?php
 
 
-class SQLQuery {
+class SQLQuery
+{
     protected $_dbHandle;
     protected $_result;
     public $dbh;
@@ -15,7 +16,7 @@ class SQLQuery {
             $this->_dbHandle = new PDO($dsn, $account, $pwd);
             $this->_dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new Exceptions($e->getMessage());
+            throw new Exceptions(500, $e->getMessage(), $e->getCode());
         }
         return $this->_dbHandle;
     }
@@ -26,11 +27,3 @@ class SQLQuery {
         return 0;
     }
 }
-//
-//class Exception {
-//
-//    $error_code;
-//    $error_msg;
-//
-//
-//}

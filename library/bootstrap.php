@@ -1,5 +1,5 @@
 <?php
 
 require_once (ROOT . DS . 'config' . DS . 'config.php');
-require_once (ROOT . DS . 'library' . DS . 'shared.php');
-require_once(ROOT . DS . 'library' . DS . 'Exceptions.class.php');
+require_once(ROOT . DS . 'library' . DS . 'request_map.php');
+require_once(ROOT . DS . 'library' . DS . 'exceptions.class.php');
